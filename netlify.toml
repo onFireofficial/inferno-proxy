@@ -1,3 +1,7 @@
 [build]
-  command = "pnpm install"
   publish = "public"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

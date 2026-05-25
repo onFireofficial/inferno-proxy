@@ -1,20 +1,18 @@
-FROM node:18-alpine
+from node:18-alpine
+env node_env=production
 
-ENV NODE_ENV=production
-ARG NPM_BUILD="npm install --omit=dev"
-EXPOSE 8080/tcp
+# add pnpm natively to the core docker environment build layer
+run corepack enable && corepack prepare pnpm@latest --activate
 
-LABEL maintainer="Mercury Workshop"
-LABEL summary="Scramjet Demo Image"
-LABEL description="Example application of Scramjet"
+expose 8080/tcp
+workdir /app
 
-WORKDIR /app
+# pull down your real pnpm configuration file layout
+copy ["package.json", "pnpm-lock.yaml", "./"]
 
-COPY ["package.json", "package-lock.json", "./"]
-RUN apk add --upgrade --no-cache python3 make g++
-RUN $NPM_BUILD
+run apk add --upgrade --no-cache python3 make g++
+run pnpm install --prod
 
-COPY . .
-
-ENTRYPOINT [ "node" ]
-CMD ["src/index.js"]
+copy . .
+entrypoint [ "node" ]
+cmd ["src/index.js"]
