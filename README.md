@@ -3,9 +3,10 @@
 
 <h1 align="center">Inferno Proxy</h1>
 
-<h3 align="center">A proxy for evading internet censorship.</h3>
+<h3 align="center">A proxy for evading internet censorship and school blockers.</h3>
 
 Inferno is an web proxy designed with school unblockers in mind. My project is made to bypass web browser extensions.
 
 ## This is based off of Scramjet.
 
+Currently in beta, report bugs to issues.
